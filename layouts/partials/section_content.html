@@ -1,0 +1,25 @@
+{{ $section := .section }}
+<section id="{{ $section.section_id }}" class="block block-text outer">
+  <div class="inner">
+    {{ if or $section.title $section.subtitle }}
+    <div class="block-header inner-sm">
+      {{ if $section.title }}
+      <h2 class="block-title line-top">{{ $section.title }}</h2>
+      {{ end }}
+      {{ if $section.subtitle }}
+      <p class="block-subtitle">{{ $section.subtitle | safeHTML }}</p>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ if $section.image }}
+    <div class="block-image">
+      <img src="{{ $section.image | relURL }}" alt="{{ $section.image_alt }}" />
+    </div>
+    {{ end }}
+    {{ if $section.content }}
+    <div class="block-content inner-sm">
+      {{ partial "markdownify-block" $section.content }}
+    </div>
+    {{ end }}
+  </div><!-- .inner -->
+</section><!-- .block -->
